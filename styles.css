@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+#video, #canvas {
+    border: 1px solid black;
+}
+#snap {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin: 10px;
+    cursor: pointer;
+}
+#output {
+    margin-top: 20px;
+    font-size: 18px;
+    color: blue;
+}
