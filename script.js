@@ -1,13 +1,15 @@
 // Access the camera
 const video = document.getElementById('video');
 
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then(stream => {
-        video.srcObject = stream;
-    })
-    .catch(err => {
-        console.error("Error accessing the camera: " + err);
-    });
+navigator.mediaDevices.getUserMedia({
+    video: {
+        facingMode: { ideal: "environment" }  // Use back camera
+    }
+}).then(stream => {
+    video.srcObject = stream;
+}).catch(err => {
+    console.error("Error accessing the camera: " + err);
+});
 
 // Load BodyPix model
 let net;
@@ -49,7 +51,16 @@ const context = canvas.getContext('2d');
 const snapButton = document.getElementById('snap');
 const outputDiv = document.getElementById('output');
 
-snapButton.addEventListener('click', async () => {
+snapButton.addEventListener('click', captureAndSegment);
+
+// Add event listeners for volume buttons
+window.addEventListener('keydown', (event) => {
+    if (event.key === 'VolumeUp' || event.key === 'VolumeDown') {
+        captureAndSegment();
+    }
+});
+
+async function captureAndSegment() {
     // Draw the current video frame to the canvas
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -75,6 +86,6 @@ snapButton.addEventListener('click', async () => {
         const bodyPart = partIdsToNames[partId];
         outputDiv.textContent = `Body part in the center: ${bodyPart}`;
     } else {
-        outputDiv.textContent = "Missed.";
+        outputDiv.textContent = "No body part detected in the center of the image.";
     }
-});
+}
