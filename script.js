@@ -3,7 +3,7 @@ const video = document.getElementById('video');
 
 navigator.mediaDevices.getUserMedia({
     video: {
-        facingMode: { ideal: "environment" }  // Use back camera
+        facingMode: {ideal: "environment"}  // Use back camera
     }
 }).then(stream => {
     video.srcObject = stream;
@@ -51,18 +51,16 @@ const context = canvas.getContext('2d');
 const snapButton = document.getElementById('snap');
 const outputDiv = document.getElementById('output');
 
-snapButton.addEventListener('click', captureAndSegment);
+// snapButton.addEventListener('click', captureAndSegment);
+const div = document.getElementById('myDiv');
 
-// Add event listeners for volume buttons
-window.addEventListener('keydown', (event) => {
-    if (event.key === 'VolumeUp' || event.key === 'VolumeDown') {
-        captureAndSegment();
-    }
-});
+div.addEventListener('click', captureAndSegment);
+
 
 async function captureAndSegment() {
     // Draw the current video frame to the canvas
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    context.drawImage(video, 0, 0);
+
 
     // Draw crosshair
     const centerX = Math.floor(canvas.width / 2);
