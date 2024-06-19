@@ -19,30 +19,30 @@ bodyPix.load().then(model => {
 
 // Mapping of part IDs to part names
 const partIdsToNames = {
-    0: 'left_face',
-    1: 'right_face',
-    2: 'left_upper_arm_front',
-    3: 'left_upper_arm_back',
-    4: 'right_upper_arm_front',
-    5: 'right_upper_arm_back',
-    6: 'left_lower_arm_front',
-    7: 'left_lower_arm_back',
-    8: 'right_lower_arm_front',
-    9: 'right_lower_arm_back',
-    10: 'left_hand',
-    11: 'right_hand',
-    12: 'torso_front',
-    13: 'torso_back',
-    14: 'left_upper_leg_front',
-    15: 'left_upper_leg_back',
-    16: 'right_upper_leg_front',
-    17: 'right_upper_leg_back',
-    18: 'left_lower_leg_front',
-    19: 'left_lower_leg_back',
-    20: 'right_lower_leg_front',
-    21: 'right_lower_leg_back',
-    22: 'left_feet',
-    23: 'right_feet',
+    0: 'Face',
+    1: 'Face',
+    2: 'left upper arm front',
+    3: 'left upper arm back',
+    4: 'right upper arm front',
+    5: 'right upper arm back',
+    6: 'left lower arm front',
+    7: 'left lower arm back',
+    8: 'right lower arm front',
+    9: 'right lower arm back',
+    10: 'left hand',
+    11: 'right hand',
+    12: 'torso front',
+    13: 'torso back',
+    14: 'left upper leg front',
+    15: 'left upper leg back',
+    16: 'right upper leg front',
+    17: 'right upper leg back',
+    18: 'left lower leg front',
+    19: 'left lower leg back',
+    20: 'right lower leg front',
+    21: 'right lower leg back',
+    22: 'left feet',
+    23: 'right feet',
 };
 
 // Take a picture and perform body segmentation
@@ -82,8 +82,8 @@ async function captureAndSegment() {
 
     if (partId !== -1) {
         const bodyPart = partIdsToNames[partId];
-        outputDiv.textContent = `Body part in the center: ${bodyPart}`;
+        outputDiv.textContent = `Shot into ${bodyPart}`;
     } else {
-        outputDiv.textContent = "No body part detected in the center of the image.";
+        outputDiv.textContent = "Missed!";
     }
 }
