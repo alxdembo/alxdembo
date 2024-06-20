@@ -14,7 +14,7 @@
 
     <!-- Custom styles for this template -->
     <link href="navbar-top-fixed.css" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">
 
 </head>
 <body>
@@ -48,7 +48,7 @@
 </nav>
 
 <main class="container">
-<!--    <div id="output"></div>-->
+    <!--    <div id="output"></div>-->
     <div id="myDiv" class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-4">
             <video id="video" width="480" height="640" autoplay></video>
@@ -56,6 +56,12 @@
         </div>
     </div>
 </main>
+
+<script>
+if (location.protocol !== "https:") {
+  location.protocol = "https:";
+}
+</script>
 
 
 <script src="bootstrap.bundle.min.js"></script>
