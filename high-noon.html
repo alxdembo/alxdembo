@@ -51,16 +51,16 @@
     <!--    <div id="output"></div>-->
     <div id="myDiv" class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-4">
-            <video id="video" width="480" height="640" autoplay></video>
+            <video id="video" width="480" height="640" autoplay playsinline></video>
             <canvas id="canvas" width="480" height="640"></canvas>
         </div>
     </div>
 </main>
 
 <script>
-if (location.protocol !== "https:") {
-  location.protocol = "https:";
-}
+    if (location.protocol !== "https:") {
+        location.protocol = "https:";
+    }
 </script>
 
 
