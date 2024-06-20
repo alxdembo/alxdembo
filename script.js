@@ -1,9 +1,13 @@
 // prevent landscape mode
 
-screen.orientation.addEventListener("change", (event) => {
-    var cock = new Audio('cocking-a-revolver.mp3');
+function updateOrientation() {
+    const cock = new Audio('cocking-a-revolver.mp3');
     cock.play();
-});
+}
+
+screen.orientation.addEventListener("change", updateOrientation);
+window.addEventListener('orientationchange', updateOrientation);
+window.addEventListener('resize', updateOrientation);
 
 
 // Access the camera
@@ -65,12 +69,15 @@ const div = document.getElementById('myDiv');
 
 div.addEventListener('click', captureAndSegment);
 
+const delay = 1000; // Delay in milliseconds (2000ms = 2s)
+
 
 async function captureAndSegment() {
     // Draw the current video frame to the canvas
     context.drawImage(video, 0, 0);
 
     var audio = new Audio('deagle-1.wav');
+    audio.preload = 'auto';
     audio.play();
 
 
@@ -94,13 +101,18 @@ async function captureAndSegment() {
 
     if (partId !== -1) {
         var bodypart = new Audio('sounds/' + partIdsToNames[partId][1]);
-        bodypart.play();
+
+        setTimeout(() => {
+            bodypart.play();
+        }, delay);
 
         const bodyPart = partIdsToNames[partId][0];
         outputDiv.textContent = `Shot into ${bodyPart}`;
     } else {
         const missed = new Audio('sounds/missed.mp3');
-        missed.play();
+        setTimeout(() => {
+            missed.play();
+        }, delay);
 
         outputDiv.textContent = "Missed!";
     }
