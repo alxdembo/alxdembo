@@ -1,11 +1,9 @@
-
 // prevent landscape mode
 
 screen.orientation.addEventListener("change", (event) => {
     var cock = new Audio('cocking-a-revolver.mp3');
     cock.play();
 });
-
 
 
 // Access the camera
@@ -29,31 +27,32 @@ bodyPix.load().then(model => {
 
 // Mapping of part IDs to part names
 const partIdsToNames = {
-    0: 'Face',
-    1: 'Face',
-    2: 'left upper arm front',
-    3: 'left upper arm back',
-    4: 'right upper arm front',
-    5: 'right upper arm back',
-    6: 'left lower arm front',
-    7: 'left lower arm back',
-    8: 'right lower arm front',
-    9: 'right lower arm back',
-    10: 'left hand',
-    11: 'right hand',
-    12: 'torso front',
-    13: 'torso back',
-    14: 'left upper leg front',
-    15: 'left upper leg back',
-    16: 'right upper leg front',
-    17: 'right upper leg back',
-    18: 'left lower leg front',
-    19: 'left lower leg back',
-    20: 'right lower leg front',
-    21: 'right lower leg back',
-    22: 'left feet',
-    23: 'right feet',
+    0: ['Headshot!', 'headshot.mp3'],
+    1: ['Headshot!', 'headshot.mp3'],
+    2: ['Left arm', 'left_arm.mp3'],
+    3: ['Left arm', 'left_arm.mp3'],
+    6: ['Left arm', 'left_arm.mp3'],
+    7: ['Left arm', 'left_arm.mp3'],
+    10: ['Left arm', 'left_arm.mp3'],
+    4: ['Right arm', 'right_arm.mp3'],
+    5: ['Right arm', 'right_arm.mp3'],
+    8: ['Right arm', 'right_arm.mp3'],
+    9: ['Right arm', 'right_arm.mp3'],
+    11: ['Right arm', 'right_arm.mp3'],
+    12: ['Torso', 'torso.mp3'],
+    13: ['Torso', 'torso.mp3'],
+    14: ['Left leg', 'left_leg.mp3'],
+    15: ['Left leg', 'left_leg.mp3'],
+    18: ['Left leg', 'left_leg.mp3'],
+    19: ['Left leg', 'left_leg.mp3'],
+    22: ['Left leg', 'left_leg.mp3'],
+    16: ['Right leg', 'right_leg.mp3'],
+    17: ['Right leg', 'right_leg.mp3'],
+    20: ['Right leg', 'right_leg.mp3'],
+    21: ['Right leg', 'right_leg.mp3'],
+    23: ['Right leg', 'right_leg.mp3'],
 };
+
 
 // Take a picture and perform body segmentation
 const canvas = document.getElementById('canvas');
@@ -94,7 +93,10 @@ async function captureAndSegment() {
     const partId = segmentation.data[centerIndex];
 
     if (partId !== -1) {
-        const bodyPart = partIdsToNames[partId];
+        var bodypart = new Audio('sounds/' + partIdsToNames[partId][1]);
+        bodypart.play();
+
+        const bodyPart = partIdsToNames[partId][0];
         outputDiv.textContent = `Shot into ${bodyPart}`;
     } else {
         outputDiv.textContent = "Missed!";
