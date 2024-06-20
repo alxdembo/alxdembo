@@ -67,6 +67,9 @@ async function captureAndSegment() {
     // Draw the current video frame to the canvas
     context.drawImage(video, 0, 0);
 
+    var audio = new Audio('deagle-1.wav');
+    audio.play();
+
 
     // Draw crosshair
     const centerX = Math.floor(canvas.width / 2);
