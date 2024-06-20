@@ -99,6 +99,9 @@ async function captureAndSegment() {
         const bodyPart = partIdsToNames[partId][0];
         outputDiv.textContent = `Shot into ${bodyPart}`;
     } else {
+        const missed = new Audio('sounds/missed.mp3');
+        missed.play();
+
         outputDiv.textContent = "Missed!";
     }
 }
