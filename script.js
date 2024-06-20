@@ -1,9 +1,12 @@
 
 // prevent landscape mode
 
-var myScreenOrientation = window.screen.orientation;
+screen.orientation.addEventListener("change", (event) => {
+    var cock = new Audio('cocking-a-revolver.mp3');
+    cock.play();
+});
 
-myScreenOrientation.lock("portrait");
+
 
 // Access the camera
 const video = document.getElementById('video');
