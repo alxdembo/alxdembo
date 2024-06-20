@@ -1,7 +1,7 @@
 // prevent landscape mode
 
 function updateOrientation() {
-    const cock = new Audio('cocking-a-revolver.mp3');
+    const cock = new Audio('sounds/cocking-a-revolver.mp3');
     cock.play();
 }
 
@@ -70,14 +70,14 @@ const div = document.getElementById('myDiv');
 div.addEventListener('click', captureAndSegment);
 
 const delay = 1000; // Delay in milliseconds (2000ms = 2s)
-
+const audio = new Audio('sounds/deagle-1.wav');
+audio.preload = 'auto';
 
 async function captureAndSegment() {
     // Draw the current video frame to the canvas
     context.drawImage(video, 0, 0);
 
-    var audio = new Audio('deagle-1.wav');
-    audio.preload = 'auto';
+
     audio.play();
 
 
