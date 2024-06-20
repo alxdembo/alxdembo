@@ -1,8 +1,9 @@
 
 // prevent landscape mode
 
-screen.lockOrientation("portrait-primary");
+var myScreenOrientation = window.screen.orientation;
 
+myScreenOrientation.lock("portrait");
 
 // Access the camera
 const video = document.getElementById('video');
