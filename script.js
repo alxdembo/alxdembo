@@ -6,8 +6,6 @@ function updateOrientation() {
 }
 
 screen.orientation.addEventListener("change", updateOrientation);
-window.addEventListener('orientationchange', updateOrientation);
-window.addEventListener('resize', updateOrientation);
 
 
 // Access the camera
@@ -19,6 +17,15 @@ navigator.mediaDevices.getUserMedia({
     }
 }).then(stream => {
     video.srcObject = stream;
+    video.addEventListener('loadedmetadata', function () {
+        console.log('Video is available');
+        const segmentation = net.segmentPersonParts(video);
+        segmentation.data;
+        outputDiv.textContent = 'Ready!';
+
+        console.log('Model is loaded.');
+    });
+
 }).catch(err => {
     console.error("Error accessing the camera: " + err);
 });
@@ -30,33 +37,15 @@ bodyPix.load().then(model => {
 });
 
 // Mapping of part IDs to part names
-const partIdsToNames = {
-    0: ['Headshot!', 'headshot.mp3'],
-    1: ['Headshot!', 'headshot.mp3'],
-    2: ['Left arm', 'left_arm.mp3'],
-    3: ['Left arm', 'left_arm.mp3'],
-    6: ['Left arm', 'left_arm.mp3'],
-    7: ['Left arm', 'left_arm.mp3'],
-    10: ['Left arm', 'left_arm.mp3'],
-    4: ['Right arm', 'right_arm.mp3'],
-    5: ['Right arm', 'right_arm.mp3'],
-    8: ['Right arm', 'right_arm.mp3'],
-    9: ['Right arm', 'right_arm.mp3'],
-    11: ['Right arm', 'right_arm.mp3'],
-    12: ['Torso', 'torso.mp3'],
-    13: ['Torso', 'torso.mp3'],
-    14: ['Left leg', 'left_leg.mp3'],
-    15: ['Left leg', 'left_leg.mp3'],
-    18: ['Left leg', 'left_leg.mp3'],
-    19: ['Left leg', 'left_leg.mp3'],
-    22: ['Left leg', 'left_leg.mp3'],
-    16: ['Right leg', 'right_leg.mp3'],
-    17: ['Right leg', 'right_leg.mp3'],
-    20: ['Right leg', 'right_leg.mp3'],
-    21: ['Right leg', 'right_leg.mp3'],
-    23: ['Right leg', 'right_leg.mp3'],
-};
+let partIdsToNames;
 
+fetch('partIds.json')
+    .then(response => response.json())
+    .then(data => {
+        partIdsToNames = data;
+        // Now you can use the partIdsToNames object
+    })
+    .catch(error => console.error('Error:', error));
 
 // Take a picture and perform body segmentation
 const canvas = document.getElementById('canvas');
@@ -70,14 +59,13 @@ const div = document.getElementById('myDiv');
 div.addEventListener('click', captureAndSegment);
 
 const delay = 1000; // Delay in milliseconds (2000ms = 2s)
-const audio = new Audio('sounds/deagle-1.wav');
-audio.preload = 'auto';
+
 
 async function captureAndSegment() {
     // Draw the current video frame to the canvas
     context.drawImage(video, 0, 0);
 
-
+    const audio = new Audio('sounds/deagle-1.mp3');
     audio.play();
 
 
@@ -107,7 +95,7 @@ async function captureAndSegment() {
         }, delay);
 
         const bodyPart = partIdsToNames[partId][0];
-        outputDiv.textContent = `Shot into ${bodyPart}`;
+        outputDiv.textContent = bodyPart;
     } else {
         const missed = new Audio('sounds/missed.mp3');
         setTimeout(() => {
