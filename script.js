@@ -7,7 +7,6 @@ function updateOrientation() {
 
 screen.orientation.addEventListener("change", updateOrientation);
 
-
 // Access the camera
 const video = document.getElementById('video');
 
@@ -58,10 +57,15 @@ const div = document.getElementById('myDiv');
 
 div.addEventListener('click', captureAndSegment);
 
-const delay = 1000; // Delay in milliseconds (2000ms = 2s)
+const delay = 500; // Delay in milliseconds (2000ms = 2s)
 
 
 async function captureAndSegment() {
+
+    if (isCooldown) {
+        // Function is on cooldown, do nothing
+        return;
+    }
     // Draw the current video frame to the canvas
     context.drawImage(video, 0, 0);
 
@@ -104,4 +108,13 @@ async function captureAndSegment() {
 
         outputDiv.textContent = "Missed!";
     }
+
+    isCooldown = true;
+
+    // Set a delay of 1 second (1000 milliseconds) before resetting the cooldown flag
+    setTimeout(() => {
+        isCooldown = false;
+    }, 1000);
 }
+
+let isCooldown = false;
