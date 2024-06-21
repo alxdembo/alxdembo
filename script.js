@@ -12,21 +12,27 @@ const video = document.getElementById('video');
 
 navigator.mediaDevices.getUserMedia({
     video: {
-        facingMode: {ideal: "environment"}  // Use back camera
+        facingMode: {ideal: "environment"},  // Use back camera
+        height: {ideal: 480},
+        width: {ideal: 480},
     }
 }).then(stream => {
     video.srcObject = stream;
     video.addEventListener('loadedmetadata', function () {
         console.log('Video is available');
+
+        // Make the video proportions square
+        const videoWidth = video.videoWidth;
+        const videoHeight = video.videoHeight;
+        const size = Math.min(videoWidth, videoHeight);
+        video.width = size;
+        video.height = size;
+
         const segmentation = net.segmentPersonParts(video);
         segmentation.data;
         outputDiv.textContent = 'Ready!';
-
         console.log('Model is loaded.');
     });
-
-}).catch(err => {
-    console.error("Error accessing the camera: " + err);
 });
 
 // Load BodyPix model
@@ -46,11 +52,12 @@ fetch('partIds.json')
     })
     .catch(error => console.error('Error:', error));
 
-// Take a picture and perform body segmentation
-const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
-const snapButton = document.getElementById('snap');
 const outputDiv = document.getElementById('output');
+// Take a picture and perform body segmentation
+const gallery = document.getElementById('gallery');
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+let capturedImages = [];
 
 // snapButton.addEventListener('click', captureAndSegment);
 const div = document.getElementById('myDiv');
@@ -66,23 +73,21 @@ async function captureAndSegment() {
         // Function is on cooldown, do nothing
         return;
     }
-    // Draw the current video frame to the canvas
-    context.drawImage(video, 0, 0);
+
 
     const audio = new Audio('sounds/deagle-1.mp3');
     audio.play();
 
 
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageDataURL = canvas.toDataURL('image/png');
+    addImageToGallery(imageDataURL);
+
     // Draw crosshair
     const centerX = Math.floor(canvas.width / 2);
     const centerY = Math.floor(canvas.height / 2);
-    context.strokeStyle = 'red';
-    context.beginPath();
-    context.moveTo(centerX - 10, centerY);
-    context.lineTo(centerX + 10, centerY);
-    context.moveTo(centerX, centerY - 10);
-    context.lineTo(centerX, centerY + 10);
-    context.stroke();
 
     // Perform body segmentation
     const segmentation = await net.segmentPersonParts(video);
@@ -115,6 +120,39 @@ async function captureAndSegment() {
     setTimeout(() => {
         isCooldown = false;
     }, 1000);
+
+
+    // Draw the current video frame to the canvas
+    if (shot === 1) {
+        context1.drawImage(video, 0, 0, 100, 100);
+        shot = 2;
+    } else if (shot === 2) {
+        context2.drawImage(video, 0, 0, 100, 100);
+        shot = 3;
+    } else if (shot === 3) {
+        context3.drawImage(video, 0, 0, 100, 100);
+        shot = 1;
+    }
 }
 
+function addImageToGallery(imageDataURL) {
+    capturedImages.unshift(imageDataURL);
+    if (capturedImages.length > 3) {
+        capturedImages.pop();
+    }
+    renderGallery();
+}
+
+// Render the gallery
+function renderGallery() {
+    gallery.innerHTML = '';
+    capturedImages.forEach(imageDataURL => {
+        const img = document.createElement('img');
+        img.src = imageDataURL;
+        gallery.appendChild(img);
+    });
+}
+
+
 let isCooldown = false;
+let shot = 1;
