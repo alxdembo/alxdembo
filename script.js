@@ -1,4 +1,18 @@
-// prevent landscape mode
+const outputDiv = document.getElementById('output');
+const gallery = document.getElementById('gallery');
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+
+const canvas2 = document.getElementById('canvas');
+const context2 = canvas2.getContext('2d');
+
+const div = document.getElementById('myDiv');
+const video = document.getElementById('video');
+
+let isCooldown = false;
+let capturedImages = [];
+
+// snapButton.addEventListener('click', captureAndSegment);
 
 function updateOrientation() {
     const cock = new Audio('sounds/cocking-a-revolver.mp3');
@@ -8,13 +22,11 @@ function updateOrientation() {
 screen.orientation.addEventListener("change", updateOrientation);
 
 // Access the camera
-const video = document.getElementById('video');
 
 navigator.mediaDevices.getUserMedia({
     video: {
         facingMode: {ideal: "environment"},  // Use back camera
-        height: {ideal: 480},
-        width: {ideal: 480},
+        height: {ideal: 480}, width: {ideal: 480},
     }
 }).then(stream => {
     video.srcObject = stream;
@@ -32,6 +44,18 @@ navigator.mediaDevices.getUserMedia({
         segmentation.data;
         outputDiv.textContent = 'Ready!';
         console.log('Model is loaded.');
+    });
+    video.addEventListener('play', function () {
+        function draw() {
+            if (video.paused || video.ended) {
+                return;
+            }
+            context2.drawImage(video, 0, 0, canvas2.width, canvas2.height);
+            applySepia();
+            requestAnimationFrame(draw);
+        }
+
+        draw();
     });
 });
 
@@ -52,15 +76,6 @@ fetch('partIds.json')
     })
     .catch(error => console.error('Error:', error));
 
-const outputDiv = document.getElementById('output');
-// Take a picture and perform body segmentation
-const gallery = document.getElementById('gallery');
-const canvas = document.createElement('canvas');
-const context = canvas.getContext('2d');
-let capturedImages = [];
-
-// snapButton.addEventListener('click', captureAndSegment);
-const div = document.getElementById('myDiv');
 
 div.addEventListener('click', captureAndSegment);
 
@@ -68,24 +83,17 @@ const delay = 500; // Delay in milliseconds (2000ms = 2s)
 
 
 async function captureAndSegment() {
-
     if (isCooldown) {
-        // Function is on cooldown, do nothing
         return;
     }
-
-
     const audio = new Audio('sounds/deagle-1.mp3');
     audio.play();
-
-
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     const imageDataURL = canvas.toDataURL('image/png');
     addImageToGallery(imageDataURL);
 
-    // Draw crosshair
     const centerX = Math.floor(canvas.width / 2);
     const centerY = Math.floor(canvas.height / 2);
 
@@ -103,8 +111,7 @@ async function captureAndSegment() {
             bodypart.play();
         }, delay);
 
-        const bodyPart = partIdsToNames[partId][0];
-        outputDiv.textContent = bodyPart;
+        outputDiv.textContent = partIdsToNames[partId][0];
     } else {
         const missed = new Audio('sounds/missed.mp3');
         setTimeout(() => {
@@ -120,19 +127,6 @@ async function captureAndSegment() {
     setTimeout(() => {
         isCooldown = false;
     }, 1000);
-
-
-    // Draw the current video frame to the canvas
-    if (shot === 1) {
-        context1.drawImage(video, 0, 0, 100, 100);
-        shot = 2;
-    } else if (shot === 2) {
-        context2.drawImage(video, 0, 0, 100, 100);
-        shot = 3;
-    } else if (shot === 3) {
-        context3.drawImage(video, 0, 0, 100, 100);
-        shot = 1;
-    }
 }
 
 function addImageToGallery(imageDataURL) {
@@ -143,7 +137,6 @@ function addImageToGallery(imageDataURL) {
     renderGallery();
 }
 
-// Render the gallery
 function renderGallery() {
     gallery.innerHTML = '';
     capturedImages.forEach(imageDataURL => {
@@ -154,5 +147,17 @@ function renderGallery() {
 }
 
 
-let isCooldown = false;
-let shot = 1;
+function applySepia() {
+    let imageData = context2.getImageData(0, 0, canvas2.width, canvas2.height);
+    let data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        data[i] = 0.393 * r + 0.769 * g + 0.189 * b;  // Red
+        data[i + 1] = 0.349 * r + 0.686 * g + 0.168 * b;  // Green
+        data[i + 2] = 0.272 * r + 0.534 * g + 0.131 * b;  // Blue
+    }
+    context2.putImageData(imageData, 0, 0);
+}

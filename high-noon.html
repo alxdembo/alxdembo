@@ -40,19 +40,15 @@
     </div>
 </nav>
 
-
-
 <main class="container">
     <div id="myDiv" class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6 col-xl-4">
-            <video id="video" width="480" height="480" autoplay playsinline></video>
-            <div id="output">Loading...</div>
+            <video id="video" hidden autoplay playsinline></video>
+            <canvas width="480" height="480" id="canvas"></canvas>
 
-
-
-
+            <div id="output">Loading... Sound on!</div>
+            <div id="gallery"></div>
         </div>
-    <div id="gallery"></div>
     </div>
 </main>
 
@@ -64,8 +60,10 @@
 
 
 <script src="bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
+<script src="tfjs.js"></script>
+<script src="body-pix.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>-->
 <script src="script.js"></script>
 
 
