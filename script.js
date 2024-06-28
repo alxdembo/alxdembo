@@ -11,7 +11,6 @@ const video = document.getElementById('video');
 
 let isCooldown = false;
 let capturedImages = [];
-
 // snapButton.addEventListener('click', captureAndSegment);
 
 function updateOrientation() {
@@ -56,6 +55,7 @@ navigator.mediaDevices.getUserMedia({
             context2.drawImage(video, 0, 0, canvas2.width, canvas2.height);
             applySepia(context2);
             requestAnimationFrame(draw);
+
         }
 
         draw();
@@ -94,7 +94,6 @@ async function captureAndSegment() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    applySepia(context);
 
     const imageDataURL = canvas.toDataURL('image/png');
     addImageToGallery(imageDataURL);

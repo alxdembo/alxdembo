@@ -45,6 +45,7 @@ body {
 #gallery img {
     width: 100px;
     height: auto;
+    filter: sepia(1);
 }
 
 .canvas {
