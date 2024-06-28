@@ -5,6 +5,13 @@ body {
     background-position: center;
 }
 
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('Nashville-z8w0.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #canvas, #video {
     width: 100%;
     height: auto;
@@ -12,10 +19,14 @@ body {
 
 #output {
     display: flex;
+    font-family: 'MyCustomFont', Arial, sans-serif;
+    color: darkred;
+    position: absolute;
+    z-index: 30;
     justify-content: center;
     align-items: center;
     text-align: center;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: bold;
     margin: 0.67em 0;
 }
@@ -56,4 +67,9 @@ body {
     height: 480px !important;
     position: absolute;
     z-index: 1;
+}
+
+#myDiv img {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }

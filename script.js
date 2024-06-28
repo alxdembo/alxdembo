@@ -43,6 +43,9 @@ navigator.mediaDevices.getUserMedia({
         const segmentation = net.segmentPersonParts(video);
         segmentation.data;
         outputDiv.textContent = 'Ready!';
+        setTimeout(() => {
+            outputDiv.textContent = '';
+        }, delay);
         console.log('Model is loaded.');
     });
     video.addEventListener('play', function () {
