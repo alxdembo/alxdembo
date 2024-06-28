@@ -36,31 +36,22 @@ body {
 }
 
 
-.frame {
+.canvas {
     position: relative;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 480px !important;
+    height: 480px !important;
     pointer-events: none;
     z-index: 20;
-        mix-blend-mode: darken;
-
+    filter: brightness(200%);
+    mix-blend-mode: darken;
 }
 
-.coveredImage {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    opacity: .0;
-    mix-blend-mode: overlay;
-}
-.coveredImage2 {
-    /*width: 100%;*/
-    /*height: 100%;*/
+
+.paper {
+    width: 480px !important;
+    height: 480px !important;
     position: absolute;
     z-index: 1;
-
-    /*opacity: .3;*/
-    /*mix-blend-mode: overlay;*/
 }
