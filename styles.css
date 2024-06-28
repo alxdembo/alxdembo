@@ -45,7 +45,7 @@ body {
 #gallery img {
     width: 100px;
     height: auto;
-    filter: sepia(1);
+    filter: sepia(1) ;
 }
 
 .canvas {
@@ -54,8 +54,9 @@ body {
     height: 480px !important;
     pointer-events: none;
     z-index: 20;
-    filter: brightness(200%);
+    filter: sepia(1) brightness(200%);
     mix-blend-mode: darken;
+
 }
 
 .overlay {

@@ -53,7 +53,7 @@ navigator.mediaDevices.getUserMedia({
                 return;
             }
             context2.drawImage(video, 0, 0, canvas2.width, canvas2.height);
-            applySepia(context2);
+            // applySepia(context2);
             requestAnimationFrame(draw);
 
         }
@@ -148,20 +148,4 @@ function renderGallery() {
         img.src = imageDataURL;
         gallery.appendChild(img);
     });
-}
-
-
-function applySepia(cc) {
-    let imageData = cc.getImageData(0, 0, canvas2.width, canvas2.height);
-    let data = imageData.data;
-    for (let i = 0; i < data.length; i += 4) {
-        const r = data[i];
-        const g = data[i + 1];
-        const b = data[i + 2];
-
-        data[i] = 0.393 * r + 0.769 * g + 0.189 * b;  // Red
-        data[i + 1] = 0.349 * r + 0.686 * g + 0.168 * b;  // Green
-        data[i + 2] = 0.272 * r + 0.534 * g + 0.131 * b;  // Blue
-    }
-    cc.putImageData(imageData, 0, 0);
 }
