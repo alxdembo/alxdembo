@@ -1,9 +1,8 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #canvas, #video {
@@ -22,12 +21,12 @@ body {
 }
 
 #gallery {
-    align-items: center;
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
     margin-top: 10px;
-    width: 100%;
-    justify-content: space-between;
+    width: 480px;
 }
 
 #gallery img {
@@ -35,22 +34,22 @@ body {
     height: auto;
 }
 
+#myDiv .canvas, #myDiv .overlay, #myDiv .paper {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+}
 
-.canvas {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 480px !important;
-    height: 480px !important;
-    pointer-events: none;
+#myDiv .canvas {
     z-index: 20;
     filter: brightness(200%);
     mix-blend-mode: darken;
 }
 
-.paper {
-    width: 480px !important;
-    height: 480px !important;
-    position: absolute;
+#myDiv .overlay {
+    z-index: 25;
+}
+
+#myDiv .paper {
     z-index: 1;
 }
