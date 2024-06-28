@@ -54,7 +54,7 @@ navigator.mediaDevices.getUserMedia({
                 return;
             }
             context2.drawImage(video, 0, 0, canvas2.width, canvas2.height);
-            applySepia();
+            applySepia(context2);
             requestAnimationFrame(draw);
         }
 
@@ -94,6 +94,8 @@ async function captureAndSegment() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    applySepia(context);
+
     const imageDataURL = canvas.toDataURL('image/png');
     addImageToGallery(imageDataURL);
 
@@ -150,8 +152,8 @@ function renderGallery() {
 }
 
 
-function applySepia() {
-    let imageData = context2.getImageData(0, 0, canvas2.width, canvas2.height);
+function applySepia(cc) {
+    let imageData = cc.getImageData(0, 0, canvas2.width, canvas2.height);
     let data = imageData.data;
     for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
@@ -162,5 +164,5 @@ function applySepia() {
         data[i + 1] = 0.349 * r + 0.686 * g + 0.168 * b;  // Green
         data[i + 2] = 0.272 * r + 0.534 * g + 0.131 * b;  // Blue
     }
-    context2.putImageData(imageData, 0, 0);
+    cc.putImageData(imageData, 0, 0);
 }

@@ -38,6 +38,8 @@ body {
     align-items: center;
     margin-top: 10px;
     width: 100%;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
 #gallery img {
@@ -72,4 +74,13 @@ body {
 #myDiv img {
     padding-right: 0 !important;
     padding-left: 0 !important;
+}
+
+#myDiv canvas {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+#myDiv {
+    width: 480px !important;
 }
