@@ -23,10 +23,10 @@ body {
 #gallery {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin-top: 10px;
-    width: 480px;
+    width: 100%;
 }
 
 #gallery img {
@@ -34,22 +34,26 @@ body {
     height: auto;
 }
 
-#myDiv .canvas, #myDiv .overlay, #myDiv .paper {
-    position: absolute;
-    width: 480px;
-    height: 480px;
-}
-
-#myDiv .canvas {
+.canvas {
+    position: relative;
+    width: 480px !important;
+    height: 480px !important;
+    pointer-events: none;
     z-index: 20;
     filter: brightness(200%);
     mix-blend-mode: darken;
 }
 
-#myDiv .overlay {
+.overlay {
+    width: 480px !important;
+    height: 480px !important;
+    position: absolute;
     z-index: 25;
 }
 
-#myDiv .paper {
+.paper {
+    width: 480px !important;
+    height: 480px !important;
+    position: absolute;
     z-index: 1;
 }
