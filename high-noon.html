@@ -13,7 +13,7 @@
 </head>
 <body>
 <main role="main" class="container mycustom-container">
-    <div class="jumbotron custom-j">
+    <div id="fire" class="jumbotron custom-j">
         <div>
             <img src="paper.png" class="paper">
         </div>
@@ -25,13 +25,12 @@
             <video id="video" autoplay muted playsinline></video>
         </div>
         <div id="output">Loading... Sound on!</div>
-
         <canvas id="canvas" hidden></canvas>
     </div>
-</main>
+    <div id="gallery" class="jumbotron"></div>
 
 
-<!--            <div id="gallery"></div>-->
+
 
 <script>
     if (location.protocol !== "https:") {

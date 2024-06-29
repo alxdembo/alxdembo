@@ -6,7 +6,7 @@ const context = canvas.getContext('2d');
 const canvas2 = document.getElementById('canvas');
 const context2 = canvas2.getContext('2d');
 
-const div = document.getElementById('myDiv');
+const div = document.getElementById('fire');
 const video = document.getElementById('video');
 
 let isCooldown = false;
