@@ -11,18 +11,29 @@
     <link rel="stylesheet" href="styles.css">
 
 </head>
-<body style="background-image: url('bg1.png');">
+<body>
+<main role="main" class="container mycustom-container">
+    <div class="jumbotron custom-j">
+        <div>
+            <img src="paper.png" class="paper">
 
-<main class="container d-flex flex-column align-items-center justify-content-center">
-    <div id="myDiv" class="row justify-content-center">
-        <video id="video" hidden autoplay playsinline></video>
-        <img src="paper.png" class="paper">
-        <canvas id="canvas" class="canvas"></canvas>
-        <img src="hand.png" class="overlay">
+        </div>
+
+        <div>
+            <img src="hand.png" id="hand">
+
+        </div>
+        <div>
+            <video id="video" autoplay playsinline></video>
+        </div>
         <div id="output">Loading... Sound on!</div>
-        <div id="gallery"></div>
+
+        <canvas id="canvas" hidden></canvas>
     </div>
 </main>
+
+
+<!--            <div id="gallery"></div>-->
 
 <script>
     if (location.protocol !== "https:") {

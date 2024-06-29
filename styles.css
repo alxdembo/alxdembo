@@ -1,8 +1,9 @@
 body {
-    margin: 0;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    background-image: url('bg1.png');
+    min-height: 100%;
 }
 
 @font-face {
@@ -12,23 +13,17 @@ body {
     font-style: normal;
 }
 
-#canvas, #video {
-    width: 100%;
-    height: auto;
-}
-
 #output {
     display: flex;
     font-family: 'MyCustomFont', Arial, sans-serif;
     color: darkred;
-    position: absolute;
     z-index: 30;
     justify-content: center;
-    align-items: center;
     text-align: center;
     font-size: 3em;
     font-weight: bold;
     margin: 0.67em 0;
+    width: 100%;
 }
 
 #gallery {
@@ -38,51 +33,54 @@ body {
     align-items: center;
     margin-top: 10px;
     width: 100%;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
 }
 
 #gallery img {
     width: 100px;
     height: auto;
-    filter: sepia(1) ;
+    filter: sepia(1);
 }
 
-.canvas {
-    position: relative;
-    width: 480px !important;
-    height: 480px !important;
-    pointer-events: none;
-    z-index: 20;
-    filter: sepia(1) brightness(200%);
+#video {
+    z-index: 1;
+    filter: sepia(1);
     mix-blend-mode: darken;
-
+    opacity: 0.8;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    mask-image: url('mask.png');
+    mask-mode: alpha;
+    mask-size: cover;
 }
 
-.overlay {
-    width: 480px !important;
-    height: 480px !important;
-    position: absolute;
-    z-index: 25;
+.mycustom-container {
+    max-width: 600px;
+}
+
+.custom-j {
+    aspect-ratio: 1/1;
+    /*background: url("paper.png");*/
+
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.custom-j div {
+    grid-row-start: 1;
+    grid-column-start: 1;
 }
 
 .paper {
-    width: 480px !important;
-    height: 480px !important;
-    position: absolute;
-    z-index: 1;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
 }
 
-#myDiv img {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
+#hand {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
 }
 
-#myDiv canvas {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-}
-
-#myDiv {
-    width: 480px !important;
-}

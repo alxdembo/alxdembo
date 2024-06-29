@@ -25,7 +25,7 @@ screen.orientation.addEventListener("change", updateOrientation);
 navigator.mediaDevices.getUserMedia({
     video: {
         facingMode: {ideal: "environment"},  // Use back camera
-        height: {ideal: 480}, width: {ideal: 480},
+        height: {ideal: 600}, width: {ideal: 600},
     }
 }).then(stream => {
     video.srcObject = stream;
