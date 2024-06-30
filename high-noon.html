@@ -13,7 +13,19 @@
 </head>
 <body>
 <main role="main" class="container mycustom-container">
-    <div id="fire" class="jumbotron custom-j">
+
+    <div class="container mt-5">
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#rules-modal">
+            Show Game Rules
+        </button>        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal"
+                style="float: right;">
+            Start Duel Timer
+        </button>
+    </div>
+
+    <div id="fire" class="jumbotron custom-j  mt-3">
         <div>
             <img src="paper.png" class="paper">
         </div>
@@ -29,7 +41,87 @@
     </div>
     <div id="gallery" class="jumbotron"></div>
 
+</main>
 
+
+<!-- The Modal -->
+<div class="modal fade" id="rules-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Rules of the Wild West Stand-Off Duel</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <h2>Howdy, Partner!</h2>
+                <p>Welcome to the Wild West! Get ready for the ultimate showdown. Here’s how you play:</p>
+
+                <h3 class="section-title">Duel Modes:</h3>
+                <ul>
+                    <li><strong>With Sound Signal:</strong> Wait for the signal. When you hear the <strong>BANG</strong>,
+                        draw your weapon and shoot!
+                    </li>
+                    <li><strong>Without Sound Signal:</strong> Keep an eye on your opponent. Whoever draws first must
+                        shoot quick!
+                    </li>
+                </ul>
+
+                <h3 class="section-title">How to Shoot:</h3>
+                <ul>
+                    <li>Each player has a <strong>viewfinder</strong> on their screen.</li>
+                    <li>To shoot, <strong>touch the viewfinder</strong> as fast as you can!</li>
+                </ul>
+
+                <h3 class="section-title">Victory:</h3>
+                <ul>
+                    <li>The winner is the first one to shoot the <strong>head</strong> or <strong>torso</strong> of
+                        their opponent!
+                    </li>
+                    <li>But beware, shoot too early and you might be disqualified!</li>
+                </ul>
+
+                <p>Now saddle up, and may the best gunslinger win!</p></div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="incompatible-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Better open this on your phone. </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <h2>Howdy, Partner!</h2>
+                <p>This game is intended to be played on mobile phones. Find an opponent, and both open this website on your phones.</p>
+                <p>https://dembo.lv/high-noon.html</p>
+
+                <img src="img_1.png" height="100" width="100"/></div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
 <script>
@@ -38,7 +130,12 @@
     }
 </script>
 
-<script src="bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 <script src="tfjs.js"></script>
 <script src="body-pix.js"></script>
 <script src="script.js"></script>

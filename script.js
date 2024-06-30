@@ -149,3 +149,9 @@ function renderGallery() {
         gallery.appendChild(img);
     });
 }
+    $(document).ready(function(){
+        // Check if the user is on a mobile device
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            $('#incompatible-modal').modal('show');
+        }
+    });

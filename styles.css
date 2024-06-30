@@ -4,6 +4,7 @@ body {
     background-position: center;
     background-image: url('bg1.png');
     height: 100vh;
+    padding-top: 0;
 }
 
 @font-face {
@@ -84,3 +85,13 @@ body {
     z-index: 100;
 }
 
+.btn-danger {
+    background-color: #b39b7c;
+    border-color: #b39b7c;
+
+}
+
+#aaa {
+    align-items: center;
+    justify-content: center;
+}
