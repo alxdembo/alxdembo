@@ -91,7 +91,7 @@ async function soundSignalListener() {
         return;
     }
 
-    outputDiv.textContent = 'Timer started.'
+    outputDiv.textContent = 'Countdown started'
     isSoundCooldown = true;
 
     const soundSignalAudio = new Audio('sounds/gryffin-cry-6995.mp3');
@@ -102,7 +102,7 @@ async function soundSignalListener() {
 
 }
 
-const delay = 500; // Delay in milliseconds (2000ms = 2s)
+const delay = 500;
 
 
 async function captureAndSegment() {

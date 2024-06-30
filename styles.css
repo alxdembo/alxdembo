@@ -88,6 +88,8 @@ body {
 .btn-danger {
     background-color: #b39b7c;
     border-color: #b39b7c;
+    font-family: 'MyCustomFont', serif;
+    font-size: 2em;
 
 }
 
