@@ -7,10 +7,13 @@ const canvas2 = document.getElementById('canvas');
 const context2 = canvas2.getContext('2d');
 
 const div = document.getElementById('fire');
+const soundSignal = document.getElementById('sound-signal');
 const video = document.getElementById('video');
 
 let isCooldown = false;
+let isSoundCooldown = false;
 let capturedImages = [];
+
 // snapButton.addEventListener('click', captureAndSegment);
 
 function updateOrientation() {
@@ -81,6 +84,23 @@ fetch('partIds.json')
 
 
 div.addEventListener('click', captureAndSegment);
+soundSignal.addEventListener('click', soundSignalListener);
+
+async function soundSignalListener() {
+    if (isSoundCooldown) {
+        return;
+    }
+
+    outputDiv.textContent = 'Timer started.'
+    isSoundCooldown = true;
+
+    const soundSignalAudio = new Audio('sounds/gryffin-cry-6995.mp3');
+    setTimeout(() => {
+        soundSignalAudio.play();
+        isSoundCooldown = false;
+    }, 5000);
+
+}
 
 const delay = 500; // Delay in milliseconds (2000ms = 2s)
 
@@ -149,9 +169,10 @@ function renderGallery() {
         gallery.appendChild(img);
     });
 }
-    $(document).ready(function(){
-        // Check if the user is on a mobile device
-        if (!/Mobi|Android/i.test(navigator.userAgent)) {
-            $('#incompatible-modal').modal('show');
-        }
-    });
+
+$(document).ready(function () {
+    // Check if the user is on a mobile device
+    if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        $('#incompatible-modal').modal('show');
+    }
+});
