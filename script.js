@@ -91,7 +91,7 @@ async function soundSignalListener() {
         return;
     }
 
-    outputDiv.textContent = 'Countdown started'
+    outputDiv.textContent = 'Countdown started. Wait for the signal.'
     isSoundCooldown = true;
 
     const soundSignalAudio = new Audio('sounds/gryffin-cry-6995.mp3');
